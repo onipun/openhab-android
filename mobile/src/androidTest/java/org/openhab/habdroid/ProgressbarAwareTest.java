@@ -1,5 +1,6 @@
 package org.openhab.habdroid;
 
+import android.util.Log;
 import android.view.View;
 import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.IdlingResource;
@@ -11,6 +12,7 @@ import org.junit.Rule;
 import org.openhab.habdroid.ui.MainActivity;
 
 public abstract class ProgressbarAwareTest {
+    private  static  final String TAG = "ProgressbarAwareTest";
     @Rule
     public IntentsTestRule<MainActivity> mActivityTestRule =
             new IntentsTestRule<>(MainActivity.class,  true, false);
@@ -20,6 +22,7 @@ public abstract class ProgressbarAwareTest {
 
     @Before
     public void setup() {
+        Log.d(TAG, "onPrgressBarAware.java");
         mActivityTestRule.launchActivity(null);
     }
 

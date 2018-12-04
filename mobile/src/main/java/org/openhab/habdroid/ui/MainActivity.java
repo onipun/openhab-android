@@ -9,6 +9,7 @@
 
 package org.openhab.habdroid.ui;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.PendingIntent;
@@ -65,7 +66,10 @@ import com.google.android.material.snackbar.Snackbar;
 import es.dmoral.toasty.Toasty;
 import okhttp3.Headers;
 import okhttp3.Request;
+
 import org.openhab.habdroid.R;
+import org.openhab.habdroid.beta.Report;
+import org.openhab.habdroid.beta.Schedule;
 import org.openhab.habdroid.core.CloudMessagingHelper;
 import org.openhab.habdroid.core.OnUpdateBroadcastReceiver;
 import org.openhab.habdroid.core.VoiceService;
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements
     private static final int INFO_REQUEST_CODE = 1004;
     // Drawer item codes
     private static final int GROUP_ID_SITEMAPS = 1;
+    private static final int REQUEST_AUTH = 0;
 
     private SharedPreferences mPrefs;
     private AsyncServiceResolver mServiceResolver;
@@ -139,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements
     private ServerProperties mServerProperties;
     private ServerProperties.UpdateHandle mPropsUpdateHandle;
     private boolean mStarted;
+//    private boolean AuthSuccess = false;
 
     /**
      * Daydreaming gets us into a funk when in fullscreen, this allows us to
@@ -164,96 +170,116 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "onCreate()");
 
-        // Set default values, false means do it one time during the very first launch
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+//        boolean check = true;
 
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // Disable screen timeout if set in preferences
-        if (mPrefs.getBoolean(Constants.PREFERENCE_SCREENTIMEROFF, false)) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        }
+//        if (check == true){
+//
+//            if (AuthSuccess == false) {
+//                //start login activity
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+////            startActivity(intent);
+//                startActivityForResult(intent, REQUEST_AUTH);
+//            }
 
-        // Set the theme to one from preferences
-        Util.setActivityTheme(this);
-        super.onCreate(savedInstanceState);
 
-        String controllerClassName = getResources().getString(R.string.controller_class);
-        try {
-            Class<?> controllerClass = Class.forName(controllerClassName);
-            Constructor<?> constructor = controllerClass.getConstructor(MainActivity.class);
-            mController = (ContentController) constructor.newInstance(this);
-        } catch (Exception e) {
-            Log.wtf(TAG, "Could not instantiate activity controller class '"
-                    + controllerClassName + "'");
-            throw new RuntimeException(e);
-        }
+//            if (AuthSuccess == true){
+                Log.d(TAG, "onCreate() MainActivity");
 
-        setContentView(R.layout.activity_main);
-        // inflate the controller dependent content view
-        ViewStub contentStub = findViewById(R.id.content_stub);
-        mController.inflateViews(contentStub);
+                // Set default values, false means do it one time during the very first launch
+                PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 
-        setupToolbar();
-        setupDrawer();
+                mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        mViewPool = new RecyclerView.RecycledViewPool();
-
-        // Check if we have openHAB page url in saved instance state?
-        if (savedInstanceState != null) {
-            mServerProperties = savedInstanceState.getParcelable("serverProperties");
-            mSelectedSitemap = savedInstanceState.getParcelable("sitemap");
-            int lastConnectionHash = savedInstanceState.getInt("connectionHash");
-            if (lastConnectionHash != -1) {
-                try {
-                    Connection c = ConnectionFactory.getUsableConnection();
-                    if (c != null && c.hashCode() == lastConnectionHash) {
-                        mConnection = c;
-                    }
-                } catch (ConnectionException e) {
-                    // ignored
+                // Disable screen timeout if set in preferences
+                if (mPrefs.getBoolean(Constants.PREFERENCE_SCREENTIMEROFF, false)) {
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 }
+
+                // Set the theme to one from preferences
+                Util.setActivityTheme(this);
+                super.onCreate(savedInstanceState);
+
+                String controllerClassName = getResources().getString(R.string.controller_class);
+                try {
+                    Class<?> controllerClass = Class.forName(controllerClassName);
+                    Constructor<?> constructor = controllerClass.getConstructor(MainActivity.class);
+                    mController = (ContentController) constructor.newInstance(this);
+                } catch (Exception e) {
+                    Log.wtf(TAG, "Could not instantiate activity controller class '"
+                            + controllerClassName + "'");
+                    throw new RuntimeException(e);
+                }
+
+                setContentView(R.layout.activity_main);
+                // inflate the controller dependent content view
+                ViewStub contentStub = findViewById(R.id.content_stub);
+                mController.inflateViews(contentStub);
+
+                setupToolbar();
+                setupDrawer();
+
+                mViewPool = new RecyclerView.RecycledViewPool();
+
+                // Check if we have openHAB page url in saved instance state?
+                if (savedInstanceState != null) {
+                    mServerProperties = savedInstanceState.getParcelable("serverProperties");
+                    mSelectedSitemap = savedInstanceState.getParcelable("sitemap");
+                    int lastConnectionHash = savedInstanceState.getInt("connectionHash");
+                    if (lastConnectionHash != -1) {
+                        try {
+                            Connection c = ConnectionFactory.getUsableConnection();
+                            if (c != null && c.hashCode() == lastConnectionHash) {
+                                mConnection = c;
+                            }
+                        } catch (ConnectionException e) {
+                            // ignored
+                        }
+                    }
+
+                    mController.onRestoreInstanceState(savedInstanceState);
+                    String lastControllerClass = savedInstanceState.getString("controller");
+                    if (!mController.getClass().getCanonicalName().equals(lastControllerClass)) {
+                        // Our controller type changed, so we need to make the new controller aware of the
+                        // page hierarchy. If the controller didn't change, the hierarchy will be restored
+                        // via the fragment state restoration.
+                        mController.recreateFragmentState();
+                    }
+                    if (savedInstanceState.getBoolean("isSitemapSelectionDialogShown")) {
+                        showSitemapSelectionDialog();
+                    }
+                }
+
+                processIntent(getIntent());
+
+                if (isFullscreenEnabled()) {
+                    IntentFilter filter = new IntentFilter(Intent.ACTION_DREAMING_STARTED);
+                    filter.addAction(Intent.ACTION_DREAMING_STOPPED);
+                    registerReceiver(mDreamReceiver, filter);
+                    checkFullscreen();
+                }
+
+                //  Create a new boolean and preference and set it to true
+                boolean isFirstStart = mPrefs.getBoolean("firstStart", true);
+
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                //  If the activity has never started before...
+                if (isFirstStart) {
+                    //  Launch app intro
+                    final Intent i = new Intent(MainActivity.this, IntroActivity.class);
+                    startActivityForResult(i, INTRO_REQUEST_CODE);
+
+                    prefsEditor.putBoolean("firstStart", false);
+                }
+                OnUpdateBroadcastReceiver.updateComparableVersion(prefsEditor);
+                prefsEditor.apply();
             }
 
-            mController.onRestoreInstanceState(savedInstanceState);
-            String lastControllerClass = savedInstanceState.getString("controller");
-            if (!mController.getClass().getCanonicalName().equals(lastControllerClass)) {
-                // Our controller type changed, so we need to make the new controller aware of the
-                // page hierarchy. If the controller didn't change, the hierarchy will be restored
-                // via the fragment state restoration.
-                mController.recreateFragmentState();
-            }
-            if (savedInstanceState.getBoolean("isSitemapSelectionDialogShown")) {
-                showSitemapSelectionDialog();
-            }
-        }
-
-        processIntent(getIntent());
-
-        if (isFullscreenEnabled()) {
-            IntentFilter filter = new IntentFilter(Intent.ACTION_DREAMING_STARTED);
-            filter.addAction(Intent.ACTION_DREAMING_STOPPED);
-            registerReceiver(mDreamReceiver, filter);
-            checkFullscreen();
-        }
-
-        //  Create a new boolean and preference and set it to true
-        boolean isFirstStart = mPrefs.getBoolean("firstStart", true);
-
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        //  If the activity has never started before...
-        if (isFirstStart) {
-            //  Launch app intro
-            final Intent i = new Intent(MainActivity.this, IntroActivity.class);
-            startActivityForResult(i, INTRO_REQUEST_CODE);
-
-            prefsEditor.putBoolean("firstStart", false);
-        }
-        OnUpdateBroadcastReceiver.updateComparableVersion(prefsEditor);
-        prefsEditor.apply();
-    }
+//        }else {
+//            Log.d(TAG, "onCreate: failed to load login page");
+//        }
+//    }
 
     private void handleConnectionChange() {
         if (mConnection instanceof DemoConnection) {
@@ -261,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             boolean hasLocalAndRemote =
                     ConnectionFactory.getConnection(Connection.TYPE_LOCAL) != null
-                    && ConnectionFactory.getConnection(Connection.TYPE_REMOTE) != null;
+                            && ConnectionFactory.getConnection(Connection.TYPE_REMOTE) != null;
             int type = mConnection.getConnectionType();
             if (hasLocalAndRemote && type == Connection.TYPE_LOCAL) {
                 showSnackbar(R.string.info_conn_url);
@@ -386,6 +412,7 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void onAvailableConnectionChanged() {
         Log.d(TAG, "onAvailableConnectionChanged()");
@@ -438,8 +465,7 @@ public class MainActivity extends AppCompatActivity implements
                 if (failureReason instanceof NetworkNotSupportedException) {
                     NetworkInfo info =
                             ((NetworkNotSupportedException) failureReason).getNetworkInfo();
-                    message = getString(R.string.error_network_type_unsupported,
-                            info.getTypeName());
+                    message = getString(R.string.error_network_type_unsupported,info.getTypeName());
                 } else {
                     message = getString(R.string.error_network_not_available);
                 }
@@ -563,6 +589,15 @@ public class MainActivity extends AppCompatActivity implements
                             mServerProperties);
                     startActivityForResult(settingsIntent, SETTINGS_REQUEST_CODE);
                     return true;
+                case R.id.schedule:
+                    Intent scheduleIntent = new Intent(MainActivity.this, Schedule.class);
+                    startActivity(scheduleIntent);
+                    return true;
+                    case R.id.report:
+                        Intent reportIntent = new Intent(MainActivity.this, Report.class);
+                        startActivity(reportIntent);
+                        return true;
+
                 case R.id.about:
                     openAbout();
                     return true;
@@ -618,17 +653,17 @@ public class MainActivity extends AppCompatActivity implements
         if (url != null) {
             mConnection.getAsyncHttpClient().get(url,
                     new AsyncHttpClient.BitmapResponseHandler(defaultIcon.getIntrinsicWidth()) {
-                @Override
-                public void onFailure(Request request, int statusCode, Throwable error) {
-                    Log.w(TAG, "Could not fetch icon for sitemap " + sitemap.name());
-                }
-                @Override
-                public void onSuccess(Bitmap bitmap, Headers headers) {
-                    if (bitmap != null) {
-                        item.setIcon(new BitmapDrawable(bitmap));
-                    }
-                }
-            });
+                        @Override
+                        public void onFailure(Request request, int statusCode, Throwable error) {
+                            Log.w(TAG, "Could not fetch icon for sitemap " + sitemap.name());
+                        }
+                        @Override
+                        public void onSuccess(Bitmap bitmap, Headers headers) {
+                            if (bitmap != null) {
+                                item.setIcon(new BitmapDrawable(bitmap));
+                            }
+                        }
+                    });
         }
     }
 
@@ -809,6 +844,14 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+//    public void onActivityResult(int resultCode){
+//        Log.d(TAG, "onActivityResult: is called");
+//     if (resultCode == -1){
+//         AuthSuccess = true;
+//     } else{
+//         AuthSuccess = false;
+//     }
+//    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(TAG, String.format("onActivityResult() requestCode = %d, resultCode = %d",
@@ -818,7 +861,8 @@ public class MainActivity extends AppCompatActivity implements
                 if (data == null) {
                     break;
                 }
-                if (data.getBooleanExtra(PreferencesActivity.RESULT_EXTRA_SITEMAP_CLEARED, false)) {
+                if (data.getBooleanExtra(PreferencesActivity.RESULT_EXTRA_SITEMAP_CLEARED, false)
+                        && getConnection() != null) {
                     Sitemap sitemap = selectConfiguredSitemapFromList();
                     if (sitemap != null) {
                         openSitemap(sitemap);

@@ -2,15 +2,20 @@ package org.openhab.habdroid;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
+
 import androidx.test.InstrumentationRegistry;
 
 import org.junit.Before;
 import org.openhab.habdroid.util.Constants;
 
+import static com.googlecode.eyesfree.utils.LogUtils.TAG;
+
 public abstract class TestWithoutIntro extends ProgressbarAwareTest {
     @Override
     @Before
     public void setup() {
+        Log.d(TAG, "onTestWithoutIntro.java");
         SharedPreferences.Editor edit = PreferenceManager
                 .getDefaultSharedPreferences(InstrumentationRegistry.getTargetContext())
                 .edit();
@@ -23,6 +28,7 @@ public abstract class TestWithoutIntro extends ProgressbarAwareTest {
 
         edit.putBoolean(Constants.PREFERENCE_DEMOMODE, true);
         edit.putBoolean(Constants.PREFERENCE_FIRST_START, false).commit();
+
 
         super.setup();
         setupRegisterIdlingResources();

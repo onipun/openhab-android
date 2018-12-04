@@ -95,6 +95,7 @@ public class PageConnectionHolderFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: PageConnectionHolderFragment");
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
