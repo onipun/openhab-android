@@ -25,8 +25,10 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
 import java.util.Calendar;
 import java.util.List;
+
 import androidx.fragment.app.Fragment;
 
 import static android.content.Context.ALARM_SERVICE;
@@ -43,7 +45,7 @@ public class AddScheduleActivityFragment extends Fragment {
     private StringBuilder aTime;
     private RadioGroup radG;
     private RadioButton radB;
-    private CheckBox mon, tue,wed, thu, fri, sat, sun;
+    private CheckBox mon, tue, wed, thu, fri, sat, sun;
     private View v;
     private final Calendar c = Calendar.getInstance();
     private static final String TAG = AddScheduleActivityFragment.class.getSimpleName();
@@ -59,43 +61,43 @@ public class AddScheduleActivityFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.activity_add_schedule, container, false);
 
         dbA = dbA.getsLoginDbInitiate(getActivity());
-        titleRem =  v.findViewById(R.id.titleRem);
-        categoryRem =  v.findViewById(R.id.categoryRem);
-        saveRem =  v.findViewById(R.id.saveRem);
-        resetRem =  v.findViewById(R.id.resetRem);
+        titleRem = v.findViewById(R.id.titleRem);
+        categoryRem = v.findViewById(R.id.categoryRem);
+        saveRem = v.findViewById(R.id.saveRem);
+        resetRem = v.findViewById(R.id.resetRem);
         btnTimeRem = v.findViewById(R.id.btnTimeRem);
-        btnDateRem =  v.findViewById(R.id.btnDateRem);
+        btnDateRem = v.findViewById(R.id.btnDateRem);
         lblTimeRem = v.findViewById(R.id.lblTimeRem);
-        lblDateRem =  v.findViewById(R.id.lblDateRem);
-        linRem =  v.findViewById(R.id.linRem);
+        lblDateRem = v.findViewById(R.id.lblDateRem);
+        linRem = v.findViewById(R.id.linRem);
         lisRem = v.findViewById(R.id.lisRem);
-        radG =  v.findViewById(R.id.rdoGroup);
+        radG = v.findViewById(R.id.rdoGroup);
 
         setCurrentDateTime();
         loadSpinnerData();
 
-        saveRem.setOnClickListener(new View.OnClickListener(){
+        saveRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if((titleRem.getText().toString().equals(""))){
+                if ((titleRem.getText().toString().equals(""))) {
                     Message.message(v.getContext(), "Please fill in the blank!");
-                }else{
+                } else {
                     String cat = categoryRem.getSelectedItem().toString();
                     String dat = lblDateRem.getText().toString();
                     String tim = aTime.toString();
                     String tit = titleRem.getText().toString();
                     int selected_id = radG.getCheckedRadioButtonId();
-                    radB =  (RadioButton) v.findViewById(selected_id);
+                    radB = (RadioButton) v.findViewById(selected_id);
                     String rad = radB.getText().toString();
 
 
                     id = dbA.insertReminderData(cat, dat, tim, tit, rad);
-                    Log.d(TAG, "btnSave :" + id );
-                    if(id>0){
+                    Log.d(TAG, "btnSave :" + id);
+                    if (id > 0) {
                         Message.message(v.getContext(), "Saved");
                     } else {
                         Message.message(v.getContext(), "Not Saved");
@@ -121,14 +123,14 @@ public class AddScheduleActivityFragment extends Fragment {
                     intent.putExtras(b);
 
                     PendingIntent pendingIntent = PendingIntent.getService(getActivity(), keyid, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(ALARM_SERVICE);
+                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
                     alarmManager.set(AlarmManager.RTC, c.getTimeInMillis(), pendingIntent);
                     getActivity().finish();
                 }
             }
         });
 
-        resetRem.setOnClickListener(new View.OnClickListener(){
+        resetRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 titleRem.setText("");
@@ -150,18 +152,15 @@ public class AddScheduleActivityFragment extends Fragment {
         });
 
 
-
         return v;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem mi)
-    {
-        switch (mi.getItemId())
-        {
+    public boolean onOptionsItemSelected(MenuItem mi) {
+        switch (mi.getItemId()) {
             case android.R.id.home:
 //                onBackPressed();
-                
+
                 break;
 
             default:
@@ -182,7 +181,7 @@ public class AddScheduleActivityFragment extends Fragment {
         lblDateRem.setText(new StringBuilder().append(day).append("/")
                 .append(month + 1).append("/").append(year));
 
-        updateTime(hour,minute);
+        updateTime(hour, minute);
 
         aTime = new StringBuilder().append(hour).append(':')
                 .append(minute).append(" ");
@@ -193,12 +192,12 @@ public class AddScheduleActivityFragment extends Fragment {
 
         switch (id) {
             case DATE_DIALOG_ID:
-                return new DatePickerDialog(getContext(), datePickerListener,year, month,day);
+                return new DatePickerDialog(getContext(), datePickerListener, year, month, day);
 
 
             case TIME_DIALOG_ID:
                 // set time picker as current time
-                 return new TimePickerDialog(getContext(), timePickerListener, hour, minute,
+                return new TimePickerDialog(getContext(), timePickerListener, hour, minute,
                         false);
         }
         Log.d(TAG, "onCreateDialog: failed to show Date and Time dialog");
@@ -225,10 +224,10 @@ public class AddScheduleActivityFragment extends Fragment {
 
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minutes) {
-            hour   = hourOfDay;
+            hour = hourOfDay;
             minute = minutes;
 
-            updateTime(hour,minute);
+            updateTime(hour, minute);
 
             aTime = new StringBuilder().append(hour).append(':')
                     .append(minute).append(" ");
@@ -267,12 +266,8 @@ public class AddScheduleActivityFragment extends Fragment {
 
 
     private void loadSpinnerData() {
-        // database handler
-
         // Spinner Drop down elements
-//        List<String> lables = dbA.getAllLabels();
-        List<String> lables =  ItemsMiddleware.getInstance(getActivity().getApplicationContext()).getItemName();
-
+        List<String> lables = ItemsMiddleware.getInstance(getActivity().getApplicationContext()).getItemName();
 
 
         // Creating adapter for spinner

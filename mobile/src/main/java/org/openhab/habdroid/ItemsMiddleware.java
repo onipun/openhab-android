@@ -91,7 +91,7 @@ public class ItemsMiddleware {
                                 arrayList.add(item);
                             }
                         }catch (JSONException e){
-                            Log.d(TAG, "onResponse: " + e.toString());
+                            Log.d(TAG, "onResponse: error");
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -123,22 +123,25 @@ public class ItemsMiddleware {
 
     public List<String> getItemName(){
 
+
         List<String> label = new ArrayList<String>();
         String name;
 
-        Log.d(TAG, "getItemName: runned");
         if (arrayList != null) {
 
             for (int i = 0; i < arrayList.size(); i++) {
-                if (arrayList.get(i).getType() == "Switch" ) {
+
+                if (arrayList.get(i).getType().equals("Switch") ) {
+                    Log.d(TAG, "getItemName: entered");
                     name = arrayList.get(i).getName();
                     Log.d(TAG, "getItemName: " + name);
                     label.add(name);
                 }
             }
-
-
+            
             return label;
+        }else{
+            Log.d(TAG, "getItemName: arrayList is null");
         }
 
         return null;

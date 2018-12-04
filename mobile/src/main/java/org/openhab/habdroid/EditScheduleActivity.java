@@ -261,13 +261,12 @@ public class EditScheduleActivity extends AppCompatActivity {
 
 
     private void loadSpinnerData() {
-        Log.d(TAG, "loadSpinnerData: entered");
-
         // Spinner Drop down elements
-        List<String> lables = dbA.getAllLabels();
+        List<String> lables = ItemsMiddleware.getInstance(getApplicationContext()).getItemName();
+
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_spinner_item, lables);
 
         // Drop down layout style - list view with radio button
