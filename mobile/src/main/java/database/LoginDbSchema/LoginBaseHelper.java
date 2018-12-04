@@ -10,6 +10,7 @@ import org.openhab.habdroid.LoginDbInitiate;
 import static database.LoginDbSchema.LoginDbSchema.Cols.CATEGORY_REMINDER;
 import static database.LoginDbSchema.LoginDbSchema.Cols.DATE_REMINDER;
 import static database.LoginDbSchema.LoginDbSchema.Cols.ID_REMINDER;
+import static database.LoginDbSchema.LoginDbSchema.Cols.NAME;
 import static database.LoginDbSchema.LoginDbSchema.Cols.STATUS_SWITCH;
 import static database.LoginDbSchema.LoginDbSchema.Cols.SWITCH_ID;
 import static database.LoginDbSchema.LoginDbSchema.Cols.SWITCH_NAME;
@@ -48,6 +49,7 @@ public class LoginBaseHelper extends SQLiteOpenHelper {
     private  static final String SQL_ADMIN = "INSERT INTO " + LoginDbSchema.LoginTable.NAME +
             " ( 'name', 'email', 'password') VALUES ('admin'" +
             ", 'admin@gmail.com','admin123')";
+
 
     private  static final String SQL_DELETE_LOGIN =
             "DROP TABLE IF EXISTS " + LoginDbSchema.LoginTable.NAME;

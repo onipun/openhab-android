@@ -50,6 +50,8 @@ public class LoginDbInitiate {
         mDatabase = new LoginBaseHelper(mContext).getWritableDatabase();
     }
 
+
+    //USER SECTIONS
     public boolean authentication(String email, String password){
        boolean auth = false;
 
@@ -84,14 +86,17 @@ public class LoginDbInitiate {
     }
 
 
-    public void insertNewUser(String name, String password, String email){
+    public boolean insertNewUser(String name, String password, String email){
+        Log.d(TAG, "insertNewUser: entered");
         ContentValues values = getContentValues(name, password, email);
         try {
             long newRowId = mDatabase.insert(LoginDbSchema.LoginTable.NAME, null, values);
             Log.d(TAG, "insertNewUser Id: " + newRowId);
+            return true;
         }catch (Exception e) {
             Log.d(TAG, "insertNewUser Id: " + e);
         }
+        return false;
     }
 
     private static ContentValues getContentValues(String name, String password, String email){
