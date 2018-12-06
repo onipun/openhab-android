@@ -11,18 +11,18 @@
         android:title="@string/app_notifications" />
     <item
         android:id="@+id/settings"
-        android:icon="@drawable/ic_settings_black_24dp"
+        android:icon="@drawable/ic_psetting"
         android:title="@string/mainmenu_openhab_preferences" />
     <item
         android:id="@+id/schedule"
-        android:icon="@drawable/ic_info_outline"
+        android:icon="@drawable/ic_pschedule"
         android:title="Schedule" />
     <item
         android:id="@+id/report"
-        android:icon="@drawable/ic_info_outline"
+        android:icon="@drawable/ic_preport"
         android:title="Report" />
     <item
         android:id="@+id/about"
-        android:icon="@drawable/ic_info_outline"
+        android:icon="@drawable/ic_pabout"
         android:title="@string/about_title" />
 </menu>

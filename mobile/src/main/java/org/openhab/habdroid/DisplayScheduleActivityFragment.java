@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import androidx.cardview.widget.CardView;
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import androidx.fragment.app.Fragment;
 import database.LoginDbSchema.LoginDbSchema;
@@ -25,6 +27,7 @@ public class DisplayScheduleActivityFragment extends Fragment {
     private ListView listRem;
     private Button add;
     private static final String TAG = DisplayScheduleActivityFragment.class.getSimpleName();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,8 @@ public class DisplayScheduleActivityFragment extends Fragment {
 
     public void setDisplay(){
 
-        listRem = (ListView) v.findViewById(R.id.listRem);
+        listRem =  v.findViewById(R.id.listRem);
+
 
 
         String[] from = {LoginDbSchema.Cols.TITLE_REMINDER};
@@ -60,6 +64,7 @@ public class DisplayScheduleActivityFragment extends Fragment {
         @SuppressWarnings("deprecation")
         SimpleCursorAdapter sca = new SimpleCursorAdapter(getContext(),
                 R.layout.row_reminder_category, c, from, to);
+
 
 
         listRem.setAdapter(sca);

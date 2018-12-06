@@ -130,7 +130,6 @@ public class ItemsMiddleware {
         if (arrayList != null) {
 
             for (int i = 0; i < arrayList.size(); i++) {
-
                 if (arrayList.get(i).getType().equals("Switch") ) {
                     Log.d(TAG, "getItemName: entered");
                     name = arrayList.get(i).getName();
@@ -138,7 +137,6 @@ public class ItemsMiddleware {
                     label.add(name);
                 }
             }
-            
             return label;
         }else{
             Log.d(TAG, "getItemName: arrayList is null");

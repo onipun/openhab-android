@@ -74,10 +74,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/action_sign_in"
+                android:text="@string/title_activity_login"
                 android:textStyle="bold"
-                android:layout_marginRight="50dp"
-                android:layout_marginLeft="50dp"/>
+                android:layout_marginRight="70dp"
+                android:layout_marginLeft="70dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
