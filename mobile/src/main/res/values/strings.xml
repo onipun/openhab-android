@@ -68,8 +68,8 @@
     <string name="settings_insecure_connection_summary">Insecurely connected to %s</string>
 
     <!-- App messages strings -->
-    <string name="title_voice_widget">openHAB voice commands</string>
-    <string name="info_voice_input">openHAB, at your command!</string>
+    <string name="title_voice_widget">SCM voice commands</string>
+    <string name="info_voice_input">SCM, at your command!</string>
     <string name="info_voice_recognized_text">Recognized command: %1$s</string>
     <string name="info_demo_mode_short">Running in demo mode</string>
     <string name="info_conn_url">Connecting to local URL</string>
@@ -194,9 +194,9 @@
     <string name="close">Close</string>
     <string name="try_again_button">Try again</string>
     <string name="go_to_settings_button">Go to settings</string>
-    <string name="configuration_missing">Your openHAB server couldn\'t be discovered automatically. Please configure its IP address or host name in the server settings.</string>
+    <string name="configuration_missing">Your Switch Control Management server couldn\'t be discovered automatically. Please configure its IP address or host name in the server settings.</string>
     <string name="no_remote_server">Local network is unavailable and you haven\'t configured a remote server</string>
-    <string name="resolving_openhab">Trying to discover openHAB server instance\u2026</string>
+    <string name="resolving_openhab">Trying to discover Switch Control Management server instance\u2026</string>
 
     <!-- Content description for images -->
     <string name="content_description_open_roller_shutter">Open roller shutter</string>
@@ -213,18 +213,18 @@
 
     <!-- Intro strings -->
     <string name="app_intro">Intro</string>
-    <string name="intro_welcome">Welcome to openHAB</string>
-    <string name="intro_whatis">A vendor and technology agnostic open source automation software for your home</string>
-    <string name="intro_themes">Themes</string>
-    <string name="intro_themes_description">Choose between several themes</string>
-    <string name="intro_voice_description">Control your home with your voice</string>
-    <string name="intro_nfc">NFC</string>
-    <string name="intro_nfc_description">Item control can be bound to NFC tags by long-pressing the Item</string>
+    <string name="intro_welcome">Welcome to Switch Control Management</string>
+    <string name="intro_whatis">A vendor and technology agnostic open source automation software for your switch</string>
+    <string name="intro_themes">Schedule</string>
+    <string name="intro_themes_description">Create a schedule for your switch</string>
+    <string name="intro_voice_description">Control your switch with your voice</string>
+    <string name="intro_nfc">Suggestion</string>
+    <string name="intro_nfc_description">Give a suggestion on your switch behaviour</string>
     <!-- Intro "SKIP" button -->
     <string name="app_intro_skip_button">SKIP</string>
     <!-- Intro "DONE" button -->
     <string name="app_intro_done_button">DONE</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">Switch Control Management</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

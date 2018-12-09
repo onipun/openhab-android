@@ -76,6 +76,13 @@ public class AddScheduleActivityFragment extends Fragment {
         linRem = v.findViewById(R.id.linRem);
         lisRem = v.findViewById(R.id.lisRem);
         radG = v.findViewById(R.id.rdoGroup);
+        mon = v.findViewById(R.id.chkMon);
+        tue = v.findViewById(R.id.chkTue);
+        wed = v.findViewById(R.id.chkWed);
+        thu = v.findViewById(R.id.chkThu);
+        fri = v.findViewById(R.id.chkFri);
+        sat = v.findViewById(R.id.chkSat);
+        sun = v.findViewById(R.id.chkSun);
 
         setCurrentDateTime();
         loadSpinnerData();
@@ -134,6 +141,16 @@ public class AddScheduleActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 titleRem.setText("");
+                categoryRem.setSelection(0);
+                setCurrentDateTime();
+                radG.clearCheck();
+                mon.setChecked(false);
+                tue.setChecked(false);
+                wed.setChecked(false);
+                thu.setChecked(false);
+                fri.setChecked(false);
+                sat.setChecked(false);
+                sun.setChecked(false);
             }
         });
 

@@ -23,15 +23,4 @@
 
         </ListView>
 
-
-
-    <LinearLayout
-        android:id="@+id/laytbtns"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp" >
-
-    </LinearLayout>
-
 </LinearLayout>
