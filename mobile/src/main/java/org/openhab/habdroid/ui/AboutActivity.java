@@ -127,7 +127,7 @@ public class AboutActivity extends AppCompatActivity implements
             appCard.addItem(new MaterialAboutTitleItem.Builder()
                     .text(R.string.app_name)
                     .desc(context.getString(R.string.about_copyright, year))
-                    .icon(R.mipmap.icon)
+                    .icon(R.mipmap.ic_launcher_scm)
                     .build());
             appCard.addItem(new MaterialAboutActionItem.Builder()
                     .text(R.string.version)

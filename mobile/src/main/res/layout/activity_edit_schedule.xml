@@ -95,9 +95,9 @@
                 android:id="@+id/btnDateRem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:background="#c4c96b"
-                android:src="@mipmap/calendar" />
+                android:layout_marginLeft="38dp"
+                android:background="@null"
+                android:src="@mipmap/calender" />
         </LinearLayout>
 
         <LinearLayout
@@ -129,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="57dp"
-                android:background="#000000"
+                android:background="@null"
                 android:src="@mipmap/alarm" />
         </LinearLayout>
 
@@ -171,7 +171,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp" >
+            android:layout_marginRight="30dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -187,7 +188,8 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="30dp" >
+            android:layout_marginRight="30dp"
+            android:visibility="gone">
 
             <CheckBox
                 android:id="@+id/chkMon"
@@ -222,7 +224,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp" >
+            android:layout_marginRight="30dp"
+            android:visibility="gone">
 
             <CheckBox
                 android:id="@+id/chkSat"
@@ -256,6 +259,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:background="@drawable/ic_schedule_button"
                 android:layout_weight="1"
                 android:text="UPDATE" />
 
@@ -265,6 +269,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:background="@drawable/ic_schedule_button"
                 android:layout_weight="1"
                 android:text="DELETE" />
         </LinearLayout>

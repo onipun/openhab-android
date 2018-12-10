@@ -20,16 +20,16 @@ public class IntroActivity extends AppIntro {
         // Add slides
         addSlide(R.string.intro_welcome,
                 R.string.intro_whatis,
-                R.drawable.ic_openhab_appicon_340dp);
+                R.drawable.ic_logo_scm);
         addSlide(R.string.intro_themes,
                 R.string.intro_themes_description,
-                R.drawable.ic_color_lens_orange_340dp);
+                R.drawable.ic_logo_schedule);
         addSlide(R.string.mainmenu_openhab_voice_recognition,
                 R.string.intro_voice_description,
                 R.drawable.ic_mic_orange_340dp);
         addSlide(R.string.intro_nfc,
                 R.string.intro_nfc_description,
-                R.drawable.ic_nfc_orange_340dp);
+                R.drawable.ic_logo_suggestion);
 
         // Change bar color
         setBarColor(ContextCompat.getColor(this, R.color.openhab_orange));
