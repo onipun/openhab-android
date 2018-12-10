@@ -121,7 +121,7 @@ public class NotificationService extends Service {
             ItemsMiddleware.getInstance(this.getApplicationContext()).setItemState("OFF", item);
         }
 
-        int icon = R.mipmap.icon;
+        int icon = R.mipmap.ic_launcher_scm;
         CharSequence tickerText = "You got a new notification.";
         long when = System.currentTimeMillis();
         CharSequence contentTitle="Switch Control Management";
