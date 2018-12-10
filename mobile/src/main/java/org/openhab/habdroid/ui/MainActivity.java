@@ -647,7 +647,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void loadSitemapIcon(final Sitemap sitemap, final MenuItem item) {
         final String url = sitemap.icon() != null ? Uri.encode(sitemap.iconPath(), "/?=") : null;
-        Drawable defaultIcon = ContextCompat.getDrawable(this, R.drawable.ic_openhab_appicon_24dp);
+        Drawable defaultIcon = ContextCompat.getDrawable(this, R.drawable.ic_logo_scm_notext);
         item.setIcon(applyDrawerIconTint(defaultIcon));
 
         if (url != null) {
