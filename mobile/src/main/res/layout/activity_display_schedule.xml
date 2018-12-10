@@ -10,11 +10,6 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-
         </ListView>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ca349a5a76c9331342138efe29a8282a97e1c875
 </LinearLayout>

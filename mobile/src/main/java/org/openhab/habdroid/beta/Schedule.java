@@ -20,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import org.openhab.habdroid.AddRemeber;
 import org.openhab.habdroid.AddScheduleActivityFragment;
 import org.openhab.habdroid.DisplayScheduleActivityFragment;
 import org.openhab.habdroid.ItemsMiddleware;
@@ -69,8 +70,12 @@ public class Schedule extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                addFragment = new AddScheduleActivityFragment();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container,addFragment).addToBackStack(null).commit();
+//                addFragment = new AddScheduleActivityFragment();
+//                fragmentManager.beginTransaction().replace(R.id.fragment_container,addFragment).addToBackStack(null).commit();
+
+                Intent intent = new Intent(Schedule.this,AddRemeber.class);
+                startActivity(intent);
+
 
 
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -91,6 +96,8 @@ public class Schedule extends AppCompatActivity {
 
 
         ItemsMiddleware.getInstance(this.getApplicationContext()).fetchItems();
+
+
 
     }
 

@@ -252,5 +252,6 @@
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="register">Register</string>
+    <string name="title_activity_add_remeber">AddRemeber</string>
 
 </resources>

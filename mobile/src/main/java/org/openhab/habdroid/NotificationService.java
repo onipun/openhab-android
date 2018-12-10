@@ -53,6 +53,7 @@ public class NotificationService extends Service {
     private String name, status;
     private int rowId, swId;
     private Notification myNotication;
+    private String item, message;
     private static final String TAG = NotificationService.class.getSimpleName();
 
 
@@ -65,7 +66,8 @@ public class NotificationService extends Service {
     @Deprecated
     public void onStart(Intent intent, int startId) {
         super.onStart(intent, startId);
-        String message = intent.getStringExtra("msg");
+        message = intent.getStringExtra("msg");
+        item = intent.getStringExtra("item");
         Bundle b = intent.getExtras();
         rowId = b.getInt("keyid");
         dbA = dbA.getsLoginDbInitiate(getApplicationContext());
@@ -99,7 +101,7 @@ public class NotificationService extends Service {
             notificationIntent.putExtras(notificationBundle);
             contentIntent=PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
-            ItemsMiddleware.getInstance(this.getApplicationContext()).setItemState("ON", "LED");
+            ItemsMiddleware.getInstance(this.getApplicationContext()).setItemState("ON", item);
 
 
         }
@@ -116,7 +118,7 @@ public class NotificationService extends Service {
             notificationIntent.putExtras(notificationBundle);
             contentIntent=PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
-            ItemsMiddleware.getInstance(this.getApplicationContext()).setItemState("OFF", "LED");
+            ItemsMiddleware.getInstance(this.getApplicationContext()).setItemState("OFF", item);
         }
 
         int icon = R.mipmap.icon;

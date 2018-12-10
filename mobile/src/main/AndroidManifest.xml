@@ -131,7 +131,11 @@
             android:label="@string/title_activity_schedule"
             android:theme="@style/HABDroid.Light" />
         <activity android:name=".EditScheduleActivity" />
-        <activity android:name=".UserRegistration"></activity>
+        <activity android:name=".UserRegistration" />
+        <activity
+            android:name=".AddRemeber"
+            android:label="@string/title_activity_add_remeber"
+            android:theme="@style/HABDroid.Light"></activity>
     </application>
 
 </manifest>

@@ -307,6 +307,7 @@ public class EditScheduleActivity extends AppCompatActivity {
                         Intent intent = new Intent(EditScheduleActivity.this,
                                 NotificationService.class);
                         intent.putExtra("msg", message);
+                        intent.putExtra("item", categoryRem.getSelectedItem().toString());
                         intent.putExtras(b);
 
                         PendingIntent pendingIntent = PendingIntent.getService(EditScheduleActivity.this, rowId, intent, PendingIntent.FLAG_UPDATE_CURRENT);

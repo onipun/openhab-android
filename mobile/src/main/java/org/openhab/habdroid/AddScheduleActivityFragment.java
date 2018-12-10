@@ -127,6 +127,7 @@ public class AddScheduleActivityFragment extends Fragment {
                     Intent intent = new Intent(getActivity(),
                             NotificationService.class);
                     intent.putExtra("msg", message);
+                    intent.putExtra("item",cat);
                     intent.putExtras(b);
 
                     PendingIntent pendingIntent = PendingIntent.getService(getActivity(), keyid, intent, PendingIntent.FLAG_UPDATE_CURRENT);
