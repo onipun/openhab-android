@@ -128,6 +128,27 @@ public class LoginDbInitiate {
         return sw;
     }
 
+    //====================Labels===================
+
+    public List<String> getAllLabelsName(){
+        List<String> sw = new ArrayList<String>();
+
+        String selectQuery = "SELECT DISTINCT name FROM " + TABLE_SWITCH + " ORDER BY name DESC";
+
+
+        Cursor c = mDatabase.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()) {
+            do {
+                sw.add(c.getString(c.getColumnIndex("name")));
+                Log.d(TAG, "getAllLabelsName: " + c.getString(c.getColumnIndex("name")));
+            } while (c.moveToNext());
+        }
+
+        return sw;
+    }
+
+
     //====================Switch===================
 
     public long insertSwitchData(String name, String status){
@@ -137,36 +158,7 @@ public class LoginDbInitiate {
         long v = mDatabase.insert(TABLE_SWITCH, null, cv);
         return v;
     }
-
-    public Cursor getSwitchData(){
-        String[] cols = {SWITCH_ID,SWITCH_NAME};
-        Cursor c = mDatabase.query(TABLE_SWITCH, cols, null,
-                null, null, null, null);
-        return c;
-    }
-
-    public Cursor getAllSwitchData(int rowId){
-        Log.d(TAG, "getAllSwitchData: enter" );
-        Cursor c = null;
-        Log.d(TAG, "getAllSwitchData: " + c);
-        try {
-
-            String[] cols = {SWITCH_ID,
-                    SWITCH_NAME,
-                    SWITCH_STATUS};
-
-            c = mDatabase.query(TABLE_SWITCH, cols,
-                    SWITCH_ID + "= " + rowId, null, null, null, null);
-
-            Log.d(TAG, "getAllSwitchData: " + c);
-            return c;
-
-        }catch (Exception e){
-            Log.d(TAG, "getAllSwitchData: error getAllSwitch" + e);
-        }
-
-        return c = null;
-    }
+    
 
     public long updateSwitchData(int rowId, String status){
         ContentValues cv = new ContentValues();
@@ -192,6 +184,41 @@ public class LoginDbInitiate {
         mDatabase.execSQL(CREATE_SWITCH);
         
     }
+
+    public Cursor getSwitchData(String name){
+        
+        String selectQuery = "SELECT * FROM SwSwitch WHERE _id = (SELECT MAX(_id) FROM SwSwitch WHERE name =?)";
+        Cursor c = mDatabase.rawQuery(selectQuery, new String[] { name });
+        return c;
+    }
+
+    public Cursor getSwitchDataMorning(String date, String name){
+        
+        String selectQuery = "SELECT * FROM SwSwitch WHERE (timeon BETWEEN '0600' AND '1159') and (date = ?) and (name = ?) ORDER BY _id;";
+        Cursor c = mDatabase.rawQuery(selectQuery, new String[] { date, name });
+        return c;
+    }
+    public Cursor getSwitchDataDay(String date, String name){
+
+        String selectQuery = "SELECT * FROM SwSwitch WHERE (timeon BETWEEN '1200' AND '1759') and (date = ?) and (name = ?) ORDER BY _id;";
+        Cursor c = mDatabase.rawQuery(selectQuery, new String[] { date, name });
+        return c;
+    }
+    public Cursor getSwitchDataEvening(String date, String name){
+
+        String selectQuery = "SELECT * FROM SwSwitch WHERE (timeon BETWEEN '1800' AND '2359') and (date = ?) and (name = ?) ORDER BY _id;";
+        Cursor c = mDatabase.rawQuery(selectQuery, new String[] { date, name });
+        return c;
+    }
+
+    public Cursor getSwitchDataNight(String date, String name){
+
+        String selectQuery = "SELECT * FROM SwSwitch WHERE (timeon BETWEEN '0000' AND '0559') and (date = ?) and (name = ?) ORDER BY _id;";
+        Cursor c = mDatabase.rawQuery(selectQuery, new String[] { date, name });
+        return c;
+    }
+
+
 
     //====================Reminder===================
 

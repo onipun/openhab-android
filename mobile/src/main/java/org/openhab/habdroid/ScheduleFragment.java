@@ -38,9 +38,6 @@ public class ScheduleFragment extends Fragment{
         fan1 = (Switch) v.findViewById(R.id.switch3);
         btnSchedule = (Button) v.findViewById(R.id.btnSchedule);
 
-        loadLED1Data();
-        loadLED2Data();
-        loadFAN1Data();
 
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,55 +84,55 @@ public class ScheduleFragment extends Fragment{
         return v;
     }
 
-    private void loadLED1Data() {
-        String status = "";
-        c = dbA.getAllSwitchData(1);
-        if (c.moveToFirst()) {
-            do {
-                led1.setText(c.getString(1));
-                status = c.getString(2);
-            } while (c.moveToNext());
-        }
-        if (status.equals("ON")){
-            led1.setChecked(true);
+//    private void loadLED1Data() {
+//        String status = "";
+//        c = dbA.getAllSwitchData(1);
+//        if (c.moveToFirst()) {
+//            do {
+//                led1.setText(c.getString(1));
+//                status = c.getString(2);
+//            } while (c.moveToNext());
+//        }
+//        if (status.equals("ON")){
+//            led1.setChecked(true);
+//
+//        }else{
+//            led1.setChecked(false);
+//        }
+//    }
 
-        }else{
-            led1.setChecked(false);
-        }
-    }
+//    private void loadLED2Data() {
+//        String status = "";
+//        c = dbA.getAllSwitchData(2);
+//        if (c.moveToFirst()) {
+//            do {
+//                led2.setText(c.getString(1));
+//                status = c.getString(2);
+//            } while (c.moveToNext());
+//        }
+//        if (status.equals("ON")){
+//            led2.setChecked(true);
+//
+//        }else{
+//            led2.setChecked(false);
+//        }
+//    }
 
-    private void loadLED2Data() {
-        String status = "";
-        c = dbA.getAllSwitchData(2);
-        if (c.moveToFirst()) {
-            do {
-                led2.setText(c.getString(1));
-                status = c.getString(2);
-            } while (c.moveToNext());
-        }
-        if (status.equals("ON")){
-            led2.setChecked(true);
-
-        }else{
-            led2.setChecked(false);
-        }
-    }
-
-    private void loadFAN1Data() {
-        String status = "";
-        c = dbA.getAllSwitchData(3);
-        if (c.moveToFirst()) {
-            do {
-                fan1.setText(c.getString(1));
-                status = c.getString(2);
-            } while (c.moveToNext());
-        }
-        if (status.equals("ON")){
-            fan1.setChecked(true);
-
-        }else{
-            fan1.setChecked(false);
-        }
-    }
+//    private void loadFAN1Data() {
+//        String status = "";
+//        c = dbA.getAllSwitchData(3);
+//        if (c.moveToFirst()) {
+//            do {
+//                fan1.setText(c.getString(1));
+//                status = c.getString(2);
+//            } while (c.moveToNext());
+//        }
+//        if (status.equals("ON")){
+//            fan1.setChecked(true);
+//
+//        }else{
+//            fan1.setChecked(false);
+//        }
+//    }
 
 }
