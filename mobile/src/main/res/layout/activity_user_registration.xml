@@ -39,7 +39,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="#606060">
 
                 <EditText
                     android:id="@+id/nameEditText"
@@ -54,7 +55,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="#606060">
 
                 <EditText
                     android:id="@+id/passwordEditText"
@@ -68,7 +70,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="#606060">
 
                 <EditText
                     android:id="@+id/emailEditText"
