@@ -257,7 +257,6 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="@drawable/ic_schedule_button"
-            android:onClick="save"
             android:text="SAVE" />
 
         <Button
@@ -268,7 +267,6 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="@drawable/ic_schedule_button"
-            android:onClick="reset"
             android:text="RESET" />
     </LinearLayout>
 
