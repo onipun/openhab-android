@@ -287,11 +287,11 @@ public class AddRemeber extends AppCompatActivity {
 
     private void loadSpinnerData() {
         // Spinner Drop down elements
-        List<String> lables = ItemsMiddleware.getInstance(getApplicationContext()).getItemName();
+        List<String> lables = ItemsMiddleware.getInstance(AddRemeber.this).getItemName();
 
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(),
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(AddRemeber.this,
                 android.R.layout.simple_spinner_item, lables);
 
         // Drop down layout style - list view with radio button
