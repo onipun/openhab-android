@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="org.openhab.habdroid.AddRemeber"
-    tools:showIn="@layout/activity_add_remeber">
+    tools:context="org.openhab.habdroid.EditScheduleActivity"
+    tools:showIn="@layout/activity_edit_schedule">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,10 +36,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,10 +59,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -87,17 +87,15 @@
             android:layout_marginLeft="38dp"
             android:background="@null"
             android:src="@mipmap/calender" />
-
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="10dp" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -140,23 +138,22 @@
             android:text="Set switch:  " />
 
         <RadioGroup
-            android:id="@+id/rdoGroup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/rdoGroup1">
 
             <RadioButton
-                android:id="@+id/rdoON"
+                android:id="@+id/rdoON1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ON" />
+                android:text="Turn ON" />
 
             <RadioButton
-                android:id="@+id/rdoOFF"
+                android:id="@+id/rdoOFF1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="OFF" />
+                android:text="Turn OFF" />
         </RadioGroup>
-
     </LinearLayout>
 
     <LinearLayout
@@ -171,16 +168,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="2dp"
-            android:text="Select days:-  " />
+            android:text="Select days:  " />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp"
         android:visibility="gone">
 
         <CheckBox
@@ -189,25 +186,21 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="23dp"
             android:text="Mon" />
-
         <CheckBox
             android:id="@+id/chkTue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tue" />
-
         <CheckBox
             android:id="@+id/chkWed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Wed" />
-
         <CheckBox
             android:id="@+id/chkThu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thu" />
-
         <CheckBox
             android:id="@+id/chkFri"
             android:layout_width="wrap_content"
@@ -218,9 +211,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="10dp"
         android:visibility="gone">
 
         <CheckBox
@@ -229,7 +222,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="105dp"
             android:text="Sat" />
-
         <CheckBox
             android:id="@+id/chkSun"
             android:layout_width="wrap_content"
@@ -238,7 +230,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/lisRem"
+        android:id="@+id/lisRem1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
@@ -247,30 +239,27 @@
         android:id="@+id/laytbtns"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp" >
 
         <Button
-            android:id="@+id/saveRem"
+            android:id="@+id/updateRem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_weight="1"
             android:background="@drawable/ic_schedule_button"
-            android:onClick="save"
-            android:text="SAVE" />
+            android:layout_weight="1"
+            android:text="UPDATE" />
 
         <Button
-            android:id="@+id/resetRem"
+            android:id="@+id/deleteRem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_weight="1"
             android:background="@drawable/ic_schedule_button"
-            android:onClick="reset"
-            android:text="RESET" />
+            android:layout_weight="1"
+            android:text="DELETE" />
     </LinearLayout>
-
 </LinearLayout>

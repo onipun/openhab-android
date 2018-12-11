@@ -90,7 +90,7 @@ public class AddScheduleActivityFragment extends Fragment {
         saveRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((titleRem.getText().toString().equals(""))) {
+                if ((titleRem.getText().toString().equals("") && (radG.getCheckedRadioButtonId()==0))) {
                     Message.message(v.getContext(), "Please fill in the blank!");
                 } else {
                     String cat = categoryRem.getSelectedItem().toString();

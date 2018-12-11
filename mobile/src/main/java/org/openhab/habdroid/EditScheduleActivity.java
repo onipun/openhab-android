@@ -1,6 +1,8 @@
 package org.openhab.habdroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.os.Bundle;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -67,6 +69,9 @@ public class EditScheduleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_schedule);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar);
 
         titleRem = (EditText) findViewById(R.id.titleRem);
         categoryRem = (Spinner) findViewById(R.id.categoryRem);
@@ -283,38 +288,37 @@ public class EditScheduleActivity extends AppCompatActivity {
                 .setMessage("Are you sure want to update this transaction?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        int selected_id = radG.getCheckedRadioButtonId();
-                        radB = (RadioButton) findViewById(selected_id);
-                        dbA.updateReminderData(rowId,categoryRem.getSelectedItem().toString(), lblDateRem.getText().toString(), aTime.toString(), titleRem.getText().toString(), radB.getText().toString());
+                        if ((titleRem.getText().toString().equals(""))) {
+                            Message.message(EditScheduleActivity.this, "Please fill in the title and check the set switch !");
+                        }else {
+                            int selected_id = radG.getCheckedRadioButtonId();
+                            radB = (RadioButton) findViewById(selected_id);
+                            dbA.updateReminderData(rowId, categoryRem.getSelectedItem().toString(), lblDateRem.getText().toString(), aTime.toString(), titleRem.getText().toString(), radB.getText().toString());
 
-                        /*double value = Double.parseDouble(priceRem.getText().toString());
-                        NumberFormat nf = NumberFormat.getNumberInstance();
-                        nf.setMinimumFractionDigits(2);
-                        nf.setMaximumFractionDigits(2);
-                        String amount = nf.format(value);*/
-                        String message = "Switch " + categoryRem.getSelectedItem().toString() + " has been turn " + radB.getText().toString();
+                            String message = "Switch " + categoryRem.getSelectedItem().toString() + " has been turn " + radB.getText().toString();
 
-                        Calendar c = Calendar.getInstance();
-                        c.set(Calendar.MONTH, month);
-                        c.set(Calendar.DAY_OF_MONTH, day);
-                        c.set(Calendar.YEAR, (year + 1900));
-                        c.set(Calendar.HOUR_OF_DAY, hour);
-                        c.set(Calendar.MINUTE, minute);
+                            Calendar c = Calendar.getInstance();
+                            c.set(Calendar.MONTH, month);
+                            c.set(Calendar.DAY_OF_MONTH, day);
+                            c.set(Calendar.YEAR, (year + 1900));
+                            c.set(Calendar.HOUR_OF_DAY, hour);
+                            c.set(Calendar.MINUTE, minute);
 
-                        Bundle b = new Bundle();
-                        b.putInt("keyid", rowId);
+                            Bundle b = new Bundle();
+                            b.putInt("keyid", rowId);
 
-                        Intent intent = new Intent(EditScheduleActivity.this,
-                                NotificationService.class);
-                        intent.putExtra("msg", message);
-                        intent.putExtra("item", categoryRem.getSelectedItem().toString());
-                        intent.putExtras(b);
+                            Intent intent = new Intent(EditScheduleActivity.this,
+                                    NotificationService.class);
+                            intent.putExtra("msg", message);
+                            intent.putExtra("item", categoryRem.getSelectedItem().toString());
+                            intent.putExtras(b);
 
-                        PendingIntent pendingIntent = PendingIntent.getService(EditScheduleActivity.this, rowId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                        alarmManager.cancel(pendingIntent);
-                        alarmManager.set(AlarmManager.RTC, c.getTimeInMillis(), pendingIntent);
-                        finish();
+                            PendingIntent pendingIntent = PendingIntent.getService(EditScheduleActivity.this, rowId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                            alarmManager.cancel(pendingIntent);
+                            alarmManager.set(AlarmManager.RTC, c.getTimeInMillis(), pendingIntent);
+                            finish();
+                        }
                     }
                 })
                 .setNegativeButton("No", null)

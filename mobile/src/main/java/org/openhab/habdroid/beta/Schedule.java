@@ -111,7 +111,6 @@ public class Schedule extends AppCompatActivity {
     }
 
 
-
     private Date yesterday() {
         final Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -1);
@@ -400,7 +399,7 @@ public class Schedule extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Intent intent = new Intent(Schedule.this, AddScheduleActivityFragment.class);
+                        Intent intent = new Intent(Schedule.this, AddRemeber.class);
                         startActivity(intent);
                     }
                 })

@@ -128,14 +128,14 @@
         <activity android:name=".beta.Report" />
         <activity
             android:name=".beta.Schedule"
-            android:label="@string/title_activity_schedule"
-            android:theme="@style/HABDroid.Light" />
-        <activity android:name=".EditScheduleActivity" />
+            android:label="Schedule List" />
+        <activity
+            android:name=".EditScheduleActivity"
+            android:label="Edit Schedule"/>
         <activity android:name=".UserRegistration" />
         <activity
             android:name=".AddRemeber"
-            android:label="@string/title_activity_add_remeber"
-            android:theme="@style/HABDroid.Light"></activity>
+            android:label="Add Schedule"></activity>
     </application>
 
 </manifest>

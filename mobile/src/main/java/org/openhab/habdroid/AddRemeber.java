@@ -91,9 +91,11 @@ public class AddRemeber extends AppCompatActivity {
         saveRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((titleRem.getText().toString().equals(""))) {
-                    Message.message(AddRemeber.this, "Please fill in the blank!");
-                } else {
+                if ((titleRem.getText().toString().equals("")) || (radG.getCheckedRadioButtonId() == -1)) {
+                    Message.message(AddRemeber.this, "Please fill in the title and check the set switch !");
+                } else if ((titleRem.getText().toString().equals("")) && (radG.getCheckedRadioButtonId() == -1)){
+                    Message.message(AddRemeber.this, "Please fill in the title and check the set switch !");
+                }else {
                     String cat = categoryRem.getSelectedItem().toString();
                     String dat = lblDateRem.getText().toString();
                     String tim = aTime.toString();
