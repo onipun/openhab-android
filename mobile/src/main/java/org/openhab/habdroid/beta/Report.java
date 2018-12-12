@@ -62,7 +62,7 @@ public class Report extends AppCompatActivity {
             }
         }
 
-                wInflux.loadUrl("http://192.168.43.201:3000/d/TUoPc2Wgk/led?orgId=1&refresh=5m&panelId=2&fullscreen&theme=light");
+                wInflux.loadUrl("http://192.168.43.201:3000/d/TUoPc2Wgk/smart-home?orgId=1&from=1544452211572&to=1544538611572&theme=light");
 //        wInflux.setWebViewClient(new HelloWebViewClient());
 
 

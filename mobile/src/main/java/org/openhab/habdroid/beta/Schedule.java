@@ -395,7 +395,7 @@ public class Schedule extends AppCompatActivity {
     private Dialog setScheduleDialog(String day, String name) {
         return new AlertDialog.Builder(Schedule.this)
                 .setTitle("I got suggestion for you ! \nOn yesterday "+day+"...")
-                .setMessage("I found you used switch "+name+" for too long. If you forget to switch off "+name+", I suggest you set a schedule to switch off "+name+". Do you want to set a schedule for switch "+name+"?")
+                .setMessage("I found you used your Bedroom switch for too long. If you forget to switch off your Bedroom switch, I suggest you set a schedule to switch off your Bedroom switch. Do you want to set a schedule for your Bedroom switch?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

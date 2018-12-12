@@ -147,13 +147,13 @@
                 android:id="@+id/rdoON"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Turn ON" />
+                android:text="ON" />
 
             <RadioButton
                 android:id="@+id/rdoOFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Turn OFF" />
+                android:text="OFF" />
         </RadioGroup>
 
     </LinearLayout>

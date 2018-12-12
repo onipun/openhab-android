@@ -80,13 +80,13 @@ public class NotificationService extends Service {
             } while (c.moveToNext());
         }
 
-        if (name.equals("LED 1")){
+        /*if (name.equals("LED 1")){
             swId = 1;
         }else if (name.equals("LED 2")){
             swId = 2;
         }else {
             swId = 3;
-        }
+        }*/
 
         if (status.equals("ON")){
             long id = dbA.updateSwitchData(swId, status);
